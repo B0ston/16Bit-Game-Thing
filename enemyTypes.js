@@ -35,13 +35,11 @@ var EnemyTypes = {
 				"assets/Rat/idleRight/idleRight4.png"
 			],
 			"runningRight": [
-				"assets/Rat/runningRight/runningRight0.png",
-				"assets/Rat/runningRight/runningRight1.png"
+				"assets/Rat/runningRight/runningRight0.gif",
+				"assets/Rat/runningRight/runningRight1.gif"
 			]
-		},
-		"health": 50,
-		"armor": 0,
-		"canFly": false
+		}
+		
 	},
 
 	"ENEMY_ROACH": {
@@ -86,9 +84,54 @@ var EnemyTypes = {
 				"assets/Roach/attackingRight/attackingRight3.png",
 				"assets/Roach/attackingRight/attackingRight4.png",
 			]
-		},
+		}
+		
+	},
+	"PLAYER": {
+		"models": {
+			"idleLeft": [
+				"assets/Player/idleLeft/idleLeft0.png",
+				"assets/Player/idleLeft/idleLeft1.png",
+				"assets/Player/idleLeft/idleLeft2.png",
+				"assets/Player/idleLeft/idleLeft3.png",
+				"assets/Player/idleLeft/idleLeft4.png"
+			],
+			"idleRight": [
+				"assets/Player/idleRight/idleRight0.png",
+				"assets/Player/idleRight/idleRight1.png",
+				"assets/Player/idleRight/idleRight2.png",
+				"assets/Player/idleRight/idleRight3.png",
+				"assets/Player/idleRight/idleRight4.png"
+			],
+			"runningLeft": [
+				"assets/Player/runningLeft/runningLeft0.png",
+				"assets/Player/runningLeft/runningLeft1.png"
+			],
+			"runningRight": [
+				"assets/Player/runningRight/runningRight0.png",
+				"assets/Player/runningRight/runningRight1.png"
+			]
+		}
+	}
+}
+
+var EnemyTypeProperties = {
+	"ENEMY_RAT": {
+		"health": 50,
+		"armor": 0,
+		"canFly": false,
+		"isPlayer": false
+	},
+	"ENEMY_ROACH": {
 		"health": 25,
 		"armor": 15,
-		"canFly": false
+		"canFly": false,
+		"isPlayer": false
+	},
+	"PLAYER": {
+		"health": 100,
+		"armor": 0,
+		"canFly": false,
+		"isPlayer": false
 	}
 }

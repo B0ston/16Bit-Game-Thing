@@ -8,64 +8,51 @@ $(document).ready(function() {
 	var Enemies = [];
 
 	canvas.addEventListener('click', function(event) {
-		Enemies.push(new Enemy("ENEMY_RAT"))
-		Enemies[Enemies.length - 1].pos = {x: event.x, y:event.y};
+		Enemies.push(new Enemy("PLAYER"))
+		Enemies[Enemies.length - 1].pos = {x: event.x - 75, y:event.y - 75};
+		console.log(Enemies);
 	})
 
+	function preload() {
+		for (var i in AnimFrames) {
+			for (var j in AnimFrames[i]["models"]) {
+				for (var k in EnemyTypes[i]["models"][j]) {
+					AnimFrames[i]["models"][j][k] = new Image();
+					AnimFrames[i]["models"][j][k].src = EnemyTypes[i]["models"][j][k];
+				}
+			}
+		}
+	}
+	preload();
 	ctx.imageSmoothingEnabled = false;
 
-	//Animation updater.
 	function updateAnims() {
 		ctx.clearRect(0, 0, width, height);
-		for (k in Enemies) {
-			Enemies[k].checkState();
-			Enemies[k].animateArray(Enemies[k].currentState);
+		for (var k in Enemies) {
+
+			Enemies[k].animateArray();
 		}
 	}
 
-	//Update function.
-	function update() {
-	}
-	setInterval(update, 10);
 	setInterval(updateAnims, 120);
 
 	//Enemy constructor.
 	function Enemy(t) {
-		this.properties = EnemyTypes[t];
+		this.properties = EnemyTypeProperties[t];
 		this.pos = {x: 0, y:0};
-		this.currentState = this.properties.models.runningLeft;
+		this.currentState = AnimFrames[t].models.idleRight;
 		this.previousState = this.currentState;
+		this.isLoaded = false;
 
-		this.frames;
-		this.Images = [];
 		this.count = 0;
-
-		this.checkState = function() {
-			// console.log(this.currentState != this.previousState);
-			if (this.currentState != this.previousState) {
-				for (var i in this.currentState) {
-					this.Images[i] = new Image();
-					this.Images[i].src = this.currentState[i];
-				}
-
-				this.previousState = this.currentState;
-			}
-		}
-
-		for (var i in this.currentState) {
-			this.Images[i] = new Image();
-			this.Images[i].src = this.currentState[i];
-		}
-
 		this.animateArray = function() {
-			var self = this;
-			setTimeout(function() {
-				if (self.count > self.currentState.length - 1) {
-					self.count = 0;
-				}
-				ctx.drawImage(self.Images[self.count], self.pos.x, self.pos.y);
-				self.count++;
-			}, 120);
+			if (this.count > this.currentState.length - 1) {
+				this.count = 0;
+			}
+
+			ctx.drawImage(this.currentState[this.count], this.pos.x, this.pos.y);
+			this.count++;
+
 		}
 	}
 
