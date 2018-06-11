@@ -7,12 +7,10 @@ $(document).ready(function() {
 
 	var Enemies = [];
 
-	var LocalPlayer = new Enemy("PLAYER");
-	Enemies.push(LocalPlayer);
-	console.log(Enemies);
+
 	//movement
 	window.addEventListener("keydown", function(event) {
-		console.log(event.keyCode);
+		//Enemies[0] is the LocalPlayer
 		if (event.keyCode == 40) {
 			Enemies[0].directionMoving = "down";
 			Enemies[0].currentState = AnimFrames["PLAYER"].models["running"+Enemies[0].directionFacing];
@@ -38,12 +36,6 @@ $(document).ready(function() {
 		Enemies[0].directionMoving = '';
 	})
 
-	// canvas.addEventListener('click', function(event) {
-	// 	Enemies.push(new Enemy("ENEMY_ROACH"))
-	// 	Enemies[Enemies.length - 1].pos = {x: event.x - 75, y:event.y - 75};
-	// 	console.log(Enemies);
-	// })
-
 	function preload() {
 		for (var i in AnimFrames) {
 			for (var j in AnimFrames[i]["models"]) {
@@ -55,7 +47,14 @@ $(document).ready(function() {
 		}
 	}
 	preload();
+	var LocalPlayer = new Enemy("PLAYER");
+	Enemies.push(LocalPlayer);
+	console.log(Enemies);
 	ctx.imageSmoothingEnabled = false;
+
+	function checkEnemyDist(ply, enemy) {
+		return Math.hypot(enemy.pos.x - ply.pos.x, enemy.pos.y - ply.pos.y);
+	}
 
 	function updateAnims() {
 		ctx.clearRect(0, 0, width, height);
@@ -68,20 +67,20 @@ $(document).ready(function() {
 	function update() {
 		//checking player keyEvents
 		if (Enemies[0].directionMoving == "right") {
-			Enemies[0].pos.x += 5;
+			Enemies[0].pos.x += Enemies[0].stepLength;
 		}
 		if (Enemies[0].directionMoving == "left") {
-			Enemies[0].pos.x -= 5;
+			Enemies[0].pos.x -= Enemies[0].stepLength;
 		}
 		if (Enemies[0].directionMoving == "up") {
-			Enemies[0].pos.y -= 5;
+			Enemies[0].pos.y -= Enemies[0].stepLength;
 		}
 		if (Enemies[0].directionMoving == "down") {
-			Enemies[0].pos.y += 5;
+			Enemies[0].pos.y += Enemies[0].stepLength;
 		}
 	}
 
-	setInterval(updateAnims, 120);
+	setInterval(updateAnims, 20);
 	setInterval(update, 10);
 
 	//Enemy constructor.
@@ -92,19 +91,27 @@ $(document).ready(function() {
 		this.directionFacing = "Right";
 		this.directionMoving = '';
 		this.currentState = AnimFrames[t].models["idle"+this.directionFacing];
+		this.currentFrame = AnimFrames[t].models["idle"+this.directionFacing][0];
+		console.log(AnimFrames[t].models["idle"+this.directionFacing]);
 		this.previousState = this.currentState;
 		this.isLoaded = false;
+		this.stepLength = 6;
 
 		this.count = 0;
+		this.currentFrameCounter = 0;
 		this.animateArray = function() {
 			if (this.count > this.currentState.length - 1) {
+				if (this.currentFrameCounter > this.currentState.length - 1) {
+					this.currentFrameCounter = 0;
+				}
+
+				this.currentFrame = this.currentState[this.currentFrameCounter];
 				this.count = 0;
+				this.currentFrameCounter++;
 			}
 
-			ctx.drawImage(this.currentState[this.count], this.pos.x, this.pos.y);
+			ctx.drawImage(this.currentFrame, this.pos.x, this.pos.y);
 			this.count++;
-
 		}
 	}
-
 })

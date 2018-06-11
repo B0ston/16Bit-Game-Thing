@@ -39,7 +39,6 @@ var EnemyTypes = {
 				"assets/Rat/runningRight/runningRight1.gif"
 			]
 		}
-		
 	},
 
 	"ENEMY_ROACH": {
@@ -124,7 +123,7 @@ var EnemyTypeProperties = {
 	},
 	"ENEMY_ROACH": {
 		"health": 25,
-		"armor": 15,
+		"armor": 50,
 		"canFly": false,
 		"isPlayer": false
 	},
