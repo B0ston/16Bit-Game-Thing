@@ -9,8 +9,10 @@ var EnemyTypes = {
 				"assets/Rat/idleLeft/idleleft4.png"
 			],
 			"runningLeft": [
-				"assets/Rat/runningLeft/runningLeft0.gif",
-				"assets/Rat/runningLeft/runningLeft1.gif"
+				"assets/Rat/runningLeft/runningLeft0.png",
+				"assets/Rat/runningLeft/runningLeft1.png",
+				"assets/Rat/runningLeft/runningLeft2.png",
+				"assets/Rat/runningLeft/runningLeft3.png"
 			],
 			"attackingLeft": [
 				"assets/Rat/attackingLeft/attackingLeft0.png",
@@ -35,8 +37,10 @@ var EnemyTypes = {
 				"assets/Rat/idleRight/idleRight4.png"
 			],
 			"runningRight": [
-				"assets/Rat/runningRight/runningRight0.gif",
-				"assets/Rat/runningRight/runningRight1.gif"
+				"assets/Rat/runningRight/runningRight0.png",
+				"assets/Rat/runningRight/runningRight1.png",
+				"assets/Rat/runningRight/runningRight2.png",
+				"assets/Rat/runningRight/runningRight3.png"
 			]
 		}
 	},
@@ -119,18 +123,25 @@ var EnemyTypeProperties = {
 		"health": 50,
 		"armor": 0,
 		"canFly": false,
-		"isPlayer": false
+		"isPlayer": false,
+		"movementSpeed": 3,
+		"viewRange": 500,
+		"hitRange": 50
 	},
 	"ENEMY_ROACH": {
 		"health": 25,
 		"armor": 50,
 		"canFly": false,
-		"isPlayer": false
+		"isPlayer": false,
+		"movementSpeed": 4,
+		"viewRange": 400,
+		"hitRange": 50
 	},
 	"PLAYER": {
 		"health": 100,
 		"armor": 0,
 		"canFly": false,
-		"isPlayer": false
+		"movementSpeed": 6,
+		"isPlayer": true
 	}
 }
