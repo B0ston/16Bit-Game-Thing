@@ -49,7 +49,7 @@ $(document).ready(function() {
 	preload();
 	var LocalPlayer = new Enemy("PLAYER");
 	Enemies.push(LocalPlayer);
-	console.log(Enemies);
+	Enemies[1] = new Enemy("ENEMY_RAT");
 	ctx.imageSmoothingEnabled = false;
 
 	function checkEnemyDist(ply, enemy) {
@@ -78,6 +78,9 @@ $(document).ready(function() {
 		if (Enemies[0].directionMoving == "down") {
 			Enemies[0].pos.y += Enemies[0].stepLength;
 		}
+		if (checkEnemyDist(Enemies[0], Enemies[1]) < 500) {
+			console.log(true);
+		}
 	}
 
 	setInterval(updateAnims, 20);
@@ -92,7 +95,6 @@ $(document).ready(function() {
 		this.directionMoving = '';
 		this.currentState = AnimFrames[t].models["idle"+this.directionFacing];
 		this.currentFrame = AnimFrames[t].models["idle"+this.directionFacing][0];
-		console.log(AnimFrames[t].models["idle"+this.directionFacing]);
 		this.previousState = this.currentState;
 		this.isLoaded = false;
 		this.stepLength = 6;
