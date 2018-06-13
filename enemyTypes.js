@@ -121,6 +121,7 @@ var EnemyTypes = {
 var EnemyTypeProperties = {
 	"ENEMY_RAT": {
 		"health": 50,
+		"maxhealth": 50,
 		"armor": 0,
 		"canFly": false,
 		"isPlayer": false,
@@ -130,6 +131,7 @@ var EnemyTypeProperties = {
 	},
 	"ENEMY_ROACH": {
 		"health": 25,
+		"maxhealth": 25,
 		"armor": 50,
 		"canFly": false,
 		"isPlayer": false,
@@ -138,7 +140,8 @@ var EnemyTypeProperties = {
 		"hitRange": 50
 	},
 	"PLAYER": {
-		"health": 100,
+		"health": 1000,
+		"maxhealth": 1000,
 		"armor": 0,
 		"canFly": false,
 		"movementSpeed": 6,
